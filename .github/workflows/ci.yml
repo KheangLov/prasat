@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build (Cloudflare Worker)
+        run: pnpm build
+
+      - name: Build (gaming gateway remote)
+        run: pnpm build:federation
+
+      - name: Play in a browser (layout at 4 screen sizes)
+        env:
+          # GitHub's Ubuntu runners come with Google Chrome.
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: |
+          NITRO_PRESET=node-server pnpm build
+          PORT=3999 node .output/server/index.mjs &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3999/ > /dev/null && break; sleep 1; done
+          node scripts/check-layout.mjs http://127.0.0.1:3999 layout-screenshots
+
+      - name: Keep the layout screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: layout-screenshots
+          path: layout-screenshots
+          if-no-files-found: ignore

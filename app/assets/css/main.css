@@ -1,0 +1,365 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+@import "@fontsource-variable/kantumruy-pro";
+@import "@fontsource/koulen/khmer-400.css";
+@import "@fontsource/koulen/latin-400.css";
+
+/*
+ * A festival sky: deep green glass panels over a bright 3D countryside. Leaf green for
+ * actions, sun yellow for coins and stars, berry pink for warnings. Chunky shapes that are easy to tap.
+ */
+@theme {
+  --font-sans: 'Kantumruy Pro Variable', system-ui, sans-serif;
+  /* Bold poster face with Khmer and Latin, for titles, numbers and buttons. */
+  --font-display: 'Koulen', 'Kantumruy Pro Variable', sans-serif;
+
+  /* Panels, text and neutral UI (Nuxt UI's neutral colour). */
+  --color-moss-50: #eef5ef;
+  --color-moss-100: #d9e8db;
+  --color-moss-200: #b5d1b9;
+  --color-moss-300: #8db494;
+  --color-moss-400: #67946f;
+  --color-moss-500: #4b7854;
+  --color-moss-600: #3a5f42;
+  --color-moss-700: #2c4a33;
+  --color-moss-800: #1d3423;
+  --color-moss-900: #122418;
+  --color-moss-950: #07140d;
+
+  /* Actions (Nuxt UI's primary colour). */
+  --color-leaf-50: #f0fbe8;
+  --color-leaf-100: #ddf6cc;
+  --color-leaf-200: #bdec9d;
+  --color-leaf-300: #97de69;
+  --color-leaf-400: #78cc45;
+  --color-leaf-500: #5bb12c;
+  --color-leaf-600: #468d20;
+  --color-leaf-700: #376c1d;
+  --color-leaf-800: #2f561c;
+  --color-leaf-900: #29491c;
+  --color-leaf-950: #12280a;
+
+  /* Coins, stars and highlights (Nuxt UI's secondary colour). */
+  --color-sun-50: #fffbea;
+  --color-sun-100: #fff2c5;
+  --color-sun-200: #ffe587;
+  --color-sun-300: #ffd148;
+  --color-sun-400: #ffbe1f;
+  --color-sun-500: #f99d07;
+  --color-sun-600: #dd7502;
+  --color-sun-700: #b75106;
+  --color-sun-800: #943e0c;
+  --color-sun-900: #7a340d;
+  --color-sun-950: #461902;
+
+  --color-dew: #4fc3f7;
+  --color-berry: #ff5a7a;
+
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 1.6s ease-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(255 209 72 / 0.7); }
+  100% { box-shadow: 0 0 0 14px rgb(255 209 72 / 0); }
+}
+
+@keyframes drift-up {
+  from { transform: translate3d(0, 105vh, 0); }
+  to { transform: translate3d(var(--dx, 20px), -10vh, 0); }
+}
+
+@keyframes fv-pulse {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.12; }
+}
+
+@keyframes fv-bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+
+:root {
+  color-scheme: dark;
+  --radius-panel: 1.25rem;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+body {
+  background: var(--color-moss-950);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+ * Behave like an app, not a web page: no selecting text, no long-press callouts, no dragging
+ * images, and no pull-to-refresh (which would reload a level). The context menu is handled in
+ * app/plugins/appLike.client.ts.
+ */
+html {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overscroll-behavior: none;
+}
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+img,
+svg {
+  -webkit-user-drag: none;
+}
+
+@layer components {
+  .app-backdrop {
+    background:
+      radial-gradient(48rem 32rem at 10% -8%, rgb(120 204 69 / 0.22), transparent 62%),
+      radial-gradient(40rem 30rem at 110% 12%, rgb(255 190 31 / 0.14), transparent 60%),
+      radial-gradient(46rem 30rem at 40% 120%, rgb(79 195 247 / 0.12), transparent 60%),
+      linear-gradient(180deg, var(--color-moss-900), var(--color-moss-950) 72%);
+  }
+
+  /* Panels: dark glass with a soft leaf rim. */
+  .glass {
+    background: linear-gradient(180deg, rgb(29 52 35 / 0.78), rgb(18 36 24 / 0.82));
+    border: 1px solid rgb(151 222 105 / 0.16);
+    box-shadow: 0 14px 34px rgb(0 0 0 / 0.38), inset 0 1px 0 rgb(221 246 204 / 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--radius-panel);
+  }
+
+  /* Glowing title text, like sunlight through leaves. */
+  .text-glow {
+    color: var(--color-sun-100);
+    text-shadow:
+      0 2px 0 var(--color-leaf-800),
+      0 4px 0 var(--color-moss-950),
+      0 0 22px rgb(255 209 72 / 0.55);
+  }
+
+  /* Chunky game buttons with a pressable 3D edge. */
+  .btn-game {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.55rem 1.5rem;
+    border-radius: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--color-leaf-950);
+    background: linear-gradient(180deg, var(--color-leaf-300), var(--color-leaf-500));
+    box-shadow: 0 5px 0 var(--color-leaf-800), 0 10px 22px rgb(0 0 0 / 0.35), inset 0 2px 0 rgb(255 255 255 / 0.35);
+    transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+    cursor: pointer;
+  }
+  .btn-game:hover { filter: brightness(1.06); }
+  .btn-game:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--color-leaf-800), 0 4px 10px rgb(0 0 0 / 0.3), inset 0 2px 0 rgb(255 255 255 / 0.3); }
+  .btn-game:focus-visible { outline: 3px solid var(--color-sun-300); outline-offset: 3px; }
+  .btn-game:disabled { filter: grayscale(0.7) brightness(0.8); cursor: not-allowed; }
+  .btn-game.sun {
+    color: var(--color-sun-950);
+    background: linear-gradient(180deg, var(--color-sun-200), var(--color-sun-400));
+    box-shadow: 0 5px 0 var(--color-sun-800), 0 10px 22px rgb(0 0 0 / 0.35), inset 0 2px 0 rgb(255 255 255 / 0.4);
+  }
+  .btn-game.sun:active { box-shadow: 0 1px 0 var(--color-sun-800), 0 4px 10px rgb(0 0 0 / 0.3); }
+  .btn-game.ghost {
+    color: var(--color-moss-50);
+    background: linear-gradient(180deg, rgb(58 95 66 / 0.9), rgb(44 74 51 / 0.9));
+    box-shadow: 0 5px 0 var(--color-moss-950), 0 10px 22px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.12);
+  }
+  .btn-game.ghost:active { box-shadow: 0 1px 0 var(--color-moss-950); }
+  .btn-game.lg { min-height: 3.75rem; font-size: 1.7rem; padding-inline: 2.2rem; border-radius: 1.2rem; }
+
+  /* Round icon buttons in the game's top bar. */
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.9rem;
+    color: var(--color-moss-50);
+    background: linear-gradient(180deg, rgb(58 95 66 / 0.95), rgb(29 52 35 / 0.95));
+    box-shadow: 0 3px 0 var(--color-moss-950), inset 0 1px 0 rgb(255 255 255 / 0.12);
+    transition: transform 100ms ease;
+  }
+  .btn-icon:active { transform: translateY(2px) scale(0.96); }
+  .btn-icon:focus-visible { outline: 3px solid var(--color-sun-300); outline-offset: 2px; }
+  .btn-icon[aria-pressed="true"] {
+    color: var(--color-sun-950);
+    background: linear-gradient(180deg, var(--color-sun-200), var(--color-sun-400));
+    box-shadow: 0 3px 0 var(--color-sun-800);
+  }
+
+  /* The shop's cards: an animal and its price, or the market. */
+  .shop-card {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: 3.1rem;
+    padding: 0.2rem 0.7rem 0.2rem 0.35rem;
+    border-radius: 0.95rem;
+    color: #4a2e16;
+    background: linear-gradient(180deg, #fff7e0, #f0ddb0);
+    border: 3px solid #4e2e14;
+    box-shadow: 0 3px 0 #2e1a0a;
+    transition: transform 120ms cubic-bezier(0.2, 1.4, 0.4, 1), filter 120ms ease;
+    touch-action: manipulation;
+  }
+  .shop-card:active { transform: translateY(3px); box-shadow: 0 0 0 #2e1a0a; }
+  .shop-card:focus-visible { outline: 3px solid var(--color-sun-300); outline-offset: 2px; }
+  .shop-card[data-poor="true"] { filter: saturate(0.35) brightness(0.8); }
+  .shop-card.market {
+    color: var(--color-sun-950);
+    background: linear-gradient(180deg, var(--color-sun-200), var(--color-sun-400));
+    border-color: var(--color-sun-800);
+    box-shadow: 0 3px 0 var(--color-sun-900);
+  }
+  @media (orientation: landscape) and (max-height: 500px) {
+    .shop-card { height: 2.6rem; }
+  }
+  @media (max-width: 480px) {
+    .shop-card { padding-inline-end: 0.5rem; }
+  }
+
+  /* The level map's nodes. */
+  .level-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 1.1rem;
+    font-family: var(--font-display);
+    color: var(--color-leaf-950);
+    background: linear-gradient(180deg, var(--color-leaf-200), var(--color-leaf-400));
+    box-shadow: 0 5px 0 var(--color-leaf-800), 0 10px 20px rgb(0 0 0 / 0.3), inset 0 2px 0 rgb(255 255 255 / 0.4);
+    transition: transform 120ms ease;
+  }
+  .level-node:active { transform: translateY(3px); }
+  .level-node:focus-visible { outline: 3px solid var(--color-sun-300); outline-offset: 3px; }
+  .level-node[data-state="locked"] {
+    color: var(--color-moss-300);
+    background: linear-gradient(180deg, var(--color-moss-700), var(--color-moss-800));
+    box-shadow: 0 5px 0 var(--color-moss-950), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  .level-node[data-state="current"] {
+    color: var(--color-sun-950);
+    background: linear-gradient(180deg, var(--color-sun-200), var(--color-sun-400));
+    box-shadow: 0 5px 0 var(--color-sun-800), 0 10px 20px rgb(0 0 0 / 0.3);
+    animation: var(--animate-pulse-ring);
+  }
+  .level-node[data-kind="festival"] {
+    background: linear-gradient(180deg, #ff9db0, #e24a6a);
+    color: #3a0614;
+    box-shadow: 0 5px 0 #7a1030, 0 10px 20px rgb(0 0 0 / 0.3), inset 0 2px 0 rgb(255 255 255 / 0.4);
+  }
+  .level-node[data-kind="festival"][data-state="locked"] {
+    background: linear-gradient(180deg, #5a2a3a, #3a1a26);
+    color: #c98a9a;
+    box-shadow: 0 5px 0 #1f0a12;
+  }
+
+  /* The run's top bar: chunky cream pills over the sky. */
+  .hud-pill {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    height: 2.6rem;
+    padding: 0 0.7rem 0 0.4rem;
+    border-radius: 1rem;
+    color: #4a2e16;
+    background: linear-gradient(180deg, #fffaf0, #f3e2bc);
+    border: 3px solid #4e2e14;
+    box-shadow: 0 3px 0 #2e1a0a, 0 8px 18px rgb(0 0 0 / 0.25);
+    white-space: nowrap;
+  }
+  .hud-pill.done { color: var(--color-leaf-950); background: linear-gradient(180deg, var(--color-leaf-200), var(--color-leaf-400)); border-color: var(--color-leaf-800); }
+  .hud-pill.power { height: 2.2rem; font-family: var(--font-display); font-size: 1.1rem; animation: fv-bob 1.2s ease-in-out infinite; }
+
+  /* Popups laid over the 3D sky (app/game/three/sky.ts places them every frame). */
+  .sky-overlay > * { position: absolute; left: 0; top: 0; will-change: transform; }
+  .sv-popup { font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 2rem); color: #fff5c2; text-shadow: 0 3px 0 #7a340d, 0 0 14px rgb(255 190 31 / 0.8); }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgb(7 20 13 / 0.6);
+    border: 1px solid rgb(151 222 105 / 0.18);
+  }
+}
+
+/*
+ * Squircle corners where the browser can draw them (Chrome, Edge, Samsung Internet); others keep
+ * ordinary rounded corners.
+ */
+@supports (corner-shape: squircle) {
+  :root {
+    --ui-radius: 0.5rem;
+    --radius-panel: 1.75rem;
+  }
+  *,
+  *::before,
+  *::after {
+    corner-shape: squircle;
+  }
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  // Type-checks the plain TypeScript tests (run by `pnpm typecheck`).
+  "extends": "../../.nuxt/tsconfig.shared.json",
+  "include": ["./**/*.ts", "../../shared/**/*"]
+}

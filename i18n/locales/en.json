@@ -1,0 +1,186 @@
+{
+  "app": {
+    "title": "Prasat",
+    "subtitle": "Raise the temple towers",
+    "tagline": "Drop each carved stone right on the one below and raise towers like Angkor's, across 150 levels and an endless climb."
+  },
+  "home": {
+    "allGames": "All games",
+    "start": "Start building",
+    "continue": "Continue {level}",
+    "endless": "Endless tower",
+    "levels": "Levels",
+    "settings": "Settings",
+    "stars": "{n} of {total} stars",
+    "best": "Best {n}",
+    "howTitle": "How to play",
+    "how1": "A stone slides over the tower. Tap anywhere to drop it.",
+    "how2": "Whatever hangs over the stone below is cut off, so the next stone is smaller. Miss completely and the tower is done.",
+    "how3": "Drop it dead on for a perfect fit; three in a row and the stone grows back a little."
+  },
+  "map": {
+    "title": "Levels",
+    "back": "Back",
+    "world": "Temple {n}",
+    "locked": "Locked",
+    "worldLocked": "Finish temple {n} to open",
+    "story": "Story",
+    "level": "Level {label}",
+    "stars": "{n} of 3 stars"
+  },
+  "worlds": {
+    "angkor": {
+      "name": "Angkor Wat",
+      "blurb": "Sandstone carved with lotus flowers, rising over the jungle."
+    },
+    "bayon": {
+      "name": "Bayon",
+      "blurb": "Towers of smiling stone faces, looking out every way."
+    },
+    "banteaysrei": {
+      "name": "Banteay Srei",
+      "blurb": "Pink stone, carved as finely as lace. Wind sometimes."
+    },
+    "kohker": {
+      "name": "Koh Ker",
+      "blurb": "A great stepped pyramid in the far north."
+    },
+    "preahvihear": {
+      "name": "Preah Vihear",
+      "blurb": "On the edge of a cliff, high in the clouds and the wind."
+    },
+    "palace": {
+      "name": "Royal Palace",
+      "blurb": "White and gold by night: the last and tallest spires."
+    }
+  },
+  "briefing": {
+    "mission": "The tower",
+    "tips": "Watch for",
+    "start": "Build",
+    "floors": "Build {n} floors",
+    "wind": "The wind makes stones speed up and slow down",
+    "keep": "{n}% of the stone left"
+  },
+  "tips": {
+    "perfect": "Watch the edges line up, and tap. Perfect drops in a row grow the stone back.",
+    "wind": "Wind: the stone speeds up and slows down. Time your tap.",
+    "tall": "A tall tower: stay calm, and keep the stone wide.",
+    "fast": "The stones slide fast here."
+  },
+  "game": {
+    "board": "The temple",
+    "pause": "Pause",
+    "go": "Go!",
+    "streak": "Perfect ×{n}!",
+    "done": "Tower complete!",
+    "fell": "The stone fell!",
+    "floors": "{n} floors",
+    "floorsOf": "{n} of {total} floors",
+    "kept": "{n}% of the stone left",
+    "noWebgl": "This device can't show the 3D temple (WebGL is off or not supported)."
+  },
+  "hints": {
+    "tap": "Tap anywhere to drop the stone onto the tower.",
+    "cut": "Whatever hangs over the edge is cut off.",
+    "streak": "Three perfect drops in a row grow the stone back."
+  },
+  "pause": {
+    "title": "Paused",
+    "resume": "Resume",
+    "restart": "Restart",
+    "quit": "Levels",
+    "home": "Home"
+  },
+  "result": {
+    "won": "Tower complete!",
+    "lost": "The stone fell",
+    "endless": "A fine tower!",
+    "record": "New record!",
+    "theEnd": "Every temple raised!",
+    "worldDone": "Temple {n} done!",
+    "perfects": "{n} perfect",
+    "starsHint": "Keep more of the stone for more stars.",
+    "next": "Next",
+    "replay": "Build again",
+    "retry": "Try again",
+    "levels": "Levels"
+  },
+  "story": {
+    "skip": "Skip",
+    "next": "Next",
+    "done": "Let's build!",
+    "names": {
+      "sophal": "Sophal",
+      "prom": "Master Prom"
+    },
+    "angkor": {
+      "intro": {
+        "0": "Sophal. A carver's first lesson: a tower is only as good as each stone.",
+        "1": "So I set each one right on top of the last?",
+        "2": "Exactly. Whatever overhangs, we cut away. Keep your stones wide."
+      }
+    },
+    "bayon": {
+      "intro": {
+        "0": "Master, all these stone faces are smiling at me.",
+        "1": "They smile at careful hands. Let's give them a tall tower.",
+        "2": "Careful hands. Got it."
+      }
+    },
+    "banteaysrei": {
+      "intro": {
+        "0": "Banteay Srei: the finest carving in the land, in pink stone.",
+        "1": "And the wind keeps pushing my stones about!",
+        "2": "Then watch the wind as well as the stone. Patience."
+      }
+    },
+    "kohker": {
+      "intro": {
+        "0": "Koh Ker! It looks like a great staircase to the sky.",
+        "1": "Seven tiers, built a thousand years ago. Now it's your turn.",
+        "2": "A thousand years? No pressure, then."
+      }
+    },
+    "preahvihear": {
+      "intro": {
+        "0": "Preah Vihear stands at the edge of the cliff. The wind is strong up here.",
+        "1": "I can see the whole plain from here!",
+        "2": "Then don't look down. Look at your stone."
+      }
+    },
+    "palace": {
+      "intro": {
+        "0": "The Royal Palace, Master? Me, building spires here?",
+        "1": "Who else? You've raised towers at every great temple.",
+        "2": "Then tonight, I'll build the tallest of all."
+      },
+      "outro": {
+        "0": "Look at that spire in the moonlight. You're a master carver now, Sophal.",
+        "1": "I learned it one stone at a time, Master.",
+        "2": "That's the only way. Now, how high can you go with no end at all?"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "sound": "Sound effects",
+    "music": "Music",
+    "haptics": "Vibration",
+    "reset": "Erase progress",
+    "resetConfirm": "Erase all stars and levels on this device? This can't be undone.",
+    "resetDo": "Erase",
+    "cancel": "Cancel",
+    "privacy": "Your progress stays on this device.",
+    "hd": "High-quality graphics"
+  },
+  "pwa": {
+    "install": "Install",
+    "offlineReady": "Ready to play offline",
+    "iosTitle": "Install on iPhone or iPad",
+    "iosStep1": "In Safari, tap the Share button",
+    "iosStep2": "Choose “Add to Home Screen”, then “Add”.",
+    "update": "A new version is ready"
+  }
+}

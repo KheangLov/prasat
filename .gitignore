@@ -1,0 +1,36 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Cloudflare Wrangler local state
+.wrangler
+
+# Gaming gateway remote build output (copied into .output/public/mf)
+.federation
+
+# Vercel build output
+.vercel
+
+# Screenshots from pnpm layout
+layout-screenshots

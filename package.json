@@ -1,0 +1,54 @@
+{
+  "name": "prasat",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt build && pnpm build:federation && wrangler dev",
+    "deploy": "nuxt build && pnpm build:federation && wrangler deploy",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxt typecheck && tsc -p test/unit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "layout": "node scripts/check-layout.mjs",
+    "postinstall": "nuxt prepare",
+    "build:federation": "PRASAT_TARGET=federation nuxt build && node modules/gateway-remote/finish-build.mjs",
+    "icons": "node scripts/render-icons.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/kantumruy-pro": "^5.3.0",
+    "@fontsource/koulen": "^5.3.0",
+    "@iconify-json/lucide": "^1.2.137",
+    "@nuxt/ui": "^4.11.2",
+    "@nuxtjs/i18n": "^10.6.0",
+    "@pinia/nuxt": "^1.0.2",
+    "motion-v": "^2.12.0",
+    "nuxt": "^4.5.2",
+    "pinia": "^4.0.3",
+    "tailwindcss": "^4.3.3",
+    "three": "^0.180.0",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.23.2",
+    "@nuxt/eslint": "^1.17.0",
+    "@nuxt/test-utils": "^4.3.2",
+    "@types/three": "^0.180.0",
+    "@vite-pwa/nuxt": "^1.1.1",
+    "@vue/test-utils": "^2.5.1",
+    "eslint": "^10.11.0",
+    "happy-dom": "^20.14.5",
+    "playwright-core": "^1.63.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2",
+    "vue-tsc": "^3.3.11",
+    "wrangler": "^4.143.0"
+  }
+}
